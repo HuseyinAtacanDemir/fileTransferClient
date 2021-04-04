@@ -1,24 +1,41 @@
-import React, {useEffect, useState} from 'react'
-
+import React, { useState } from 'react'
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import Navbar from './components/navbar';
+import Dashboard from './pages/dashboard';
+import LoginPage from './pages/login-page';
+import NoMatch from './pages/NoMatch';
 
 const App = () => {
-  const [data, setData] = useState(null)
 
-  useEffect(() => {
-    fetch("http://localhost:4000/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaWxlTmFtZSI6InJhcHBvcnQucGRmIiwiaWF0IjoxNjE3NDQ4MDc5LCJleHAiOjE2MTc0NjYwNzl9.zxjWZ6ZvqcLFB5zXaUEUPmuz9j4x58Pz1DENBcNBH-4", {
-      method: "GET",
-      headers: {
-        'Accept': '*'
-      }
-    })
-    .then(res => console.log(res))
-    
-  }, []);
+  const [token, setToken] = useState("");
+
+  const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route {...rest} render={() => {
+      console.log("token: ", token)
+      return (
+      token
+        ? <Component token={token} />
+        : <Redirect to='/login' />
+    )}} />
+  )
 
   return (
-    <div>
-      {data}
-    </div>
+    <Router>
+      <Navbar props={{ token, setToken }} />
+
+      <Switch>
+        
+        <Route  path="/login">
+          <LoginPage props={{ token, setToken }} />
+        </Route>
+
+        <PrivateRoute props={{ token }} component={Dashboard} />
+        <>
+          <NoMatch />
+        </>
+      </Switch>
+    </Router>
+
   )
 }
 
