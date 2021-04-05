@@ -4,11 +4,12 @@ import Table from '../components/table'
 const Dashboard = ({ token }) => {
 
     const [data, setData] = useState(null);
+    const [error, setError] = useState(null);
 
-    useEffect(() => {
+    const fetchData = (token, setData) => {
         if (token !== "") {
             console.log(token)
-            fetch("http://localhost:4000/dashboard", {
+            fetch("http://192.168.3.67:4000/dashboard", {
                 method: "GET",
                 headers: {
                     'authorization': token
@@ -16,16 +17,24 @@ const Dashboard = ({ token }) => {
             })
                 .then(res => res.json())
                 .then(res => {
-                    console.log("data: ", res)
                     setData(res)
                 })
         }
+    }
 
+    useEffect(() => {
+        fetchData(token, setData)
     }, [token]);
 
+    useEffect(() => {
+        if(error) {
+            alert(error)
+            setError(null)
+        }
+    }, [error]);
     return (
         <div className="wrapper">
-            {data && <Table props={{ data, token }} />}
+            {data && <Table props={{ data, setData, token, fetchData, setError }} />}
         </div>
     )
 }

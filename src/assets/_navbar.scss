@@ -1,0 +1,30 @@
+@import './variables';
+
+.navbar-container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-width: 1200px;
+    background: $background-primary;
+    padding: 20px 0;
+    .navbar{
+        display: flex;
+        flex-direction: row;
+        width: 1200px;
+        max-width: 1200px;
+        margin: 0 auto;
+        justify-content: space-between;
+        color: $background;
+        font-size: 24px;
+        font-weight: 600;
+        padding: 0 30px;
+        .action{
+            .login{
+                cursor: pointer;
+                &:hover{
+                    color: $text-light;
+                }
+            }
+        }
+    }
+}

@@ -14,7 +14,12 @@ const LoginPage = ({ props }) => {
     const handleSubmit = async (e, email, password) => {
         e.preventDefault()
 
-        fetch("http://localhost:4000/login", {
+        if (!email || !password) {
+            alert('Please enter email and password')
+            return
+        }
+
+        fetch("http://192.168.3.67:4000/login", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -31,6 +36,9 @@ const LoginPage = ({ props }) => {
             if (res.length === 1) {
                 setToken(res[0].token)
                 history.push('/dashboard')
+            }
+            if (res[0].error) {
+                alert(res[0].error)
             }
         })
 

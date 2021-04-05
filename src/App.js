@@ -5,6 +5,8 @@ import Dashboard from './pages/dashboard';
 import LoginPage from './pages/login-page';
 import NoMatch from './pages/NoMatch';
 
+import './assets/_base.scss'
+
 const App = () => {
 
   const [token, setToken] = useState("");
