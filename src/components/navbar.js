@@ -15,20 +15,18 @@ const Navbar = ({ props }) => {
         <nav className="navbar-container">
             <div className="navbar">
                 <div>
-                   Soder Secure File Transfer
+                    JWT File Transfer
                 </div>
-                <div className="action">
-                    {token ? (
+                {token ? (
+                    <div className="action">
+
                         <span onClick={() => handleLogout()} className="login">
                             Logout
                         </span>
-                    ) : (
-                        <span>
-                            Login
-                        </span>
-                    )}
 
-                </div>
+
+                    </div>
+                ) : ''}
             </div>
         </nav>
     )

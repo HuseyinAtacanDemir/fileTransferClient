@@ -4,7 +4,7 @@ import Login from '../components/login'
 
 const LoginPage = ({ props }) => {
 
-    const { token, setToken } = props;
+    const { setToken, public_ip } = props;
 
     const history = useHistory();
 
@@ -19,7 +19,7 @@ const LoginPage = ({ props }) => {
             return
         }
 
-        fetch("http://192.168.3.67:4000/login", {
+        fetch(`http://${public_ip}:4000/login`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

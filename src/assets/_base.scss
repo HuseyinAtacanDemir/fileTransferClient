@@ -2,13 +2,12 @@
 @import "./_navbar";
 @import "./_login";
 @import "./_table";
-@import "./_table_row";
 @import "./_variables";
 
 * {
   z-index: 1;
 }
-* + h1{
+* + h1 {
   margin: 1em 0 0;
 }
 body {
@@ -21,7 +20,6 @@ body {
   box-sizing: border-box;
 
   background-color: $background !important;
-
 }
 
 h1 {
@@ -36,7 +34,7 @@ h1 {
   display: flex;
 }
 
-.editor{
+.editor {
   width: 90%;
   min-height: 100vh;
   margin: auto auto;
@@ -45,20 +43,20 @@ h1 {
 .row {
   margin: 4em 20px;
 }
-.center{
+.center {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
 }
 
-.thin{
+.thin {
   width: 40%;
 }
-.tall{
+.tall {
   min-height: 60vh;
 }
 
-.fullHeight{
+.fullHeight {
   min-height: 100vh;
 }
 
@@ -80,8 +78,7 @@ h1 {
 }
 
 @media screen and (max-width: 700px) {
-  .thin{
+  .thin {
     width: 100%;
   }
-
-  }
+}

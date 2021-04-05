@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import Table from '../components/table'
 
-const Dashboard = ({ token }) => {
+const Dashboard = ({ token, public_ip }) => {
 
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
 
     const fetchData = (token, setData) => {
         if (token !== "") {
-            console.log(token)
-            fetch("http://192.168.3.67:4000/dashboard", {
+
+            fetch(`http://${public_ip}:4000/dashboard`, {
                 method: "GET",
                 headers: {
                     'authorization': token
@@ -24,17 +24,18 @@ const Dashboard = ({ token }) => {
 
     useEffect(() => {
         fetchData(token, setData)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [token]);
 
     useEffect(() => {
-        if(error) {
+        if (error) {
             alert(error)
             setError(null)
         }
     }, [error]);
     return (
         <div className="wrapper">
-            {data && <Table props={{ data, setData, token, fetchData, setError }} />}
+            {data && <Table props={{ data, setData, token, fetchData, setError, public_ip }} />}
         </div>
     )
 }

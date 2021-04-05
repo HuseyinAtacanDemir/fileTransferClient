@@ -9,16 +9,19 @@ import './assets/_base.scss'
 
 const App = () => {
 
+  const public_ip = process.env.REACT_APP_BASE_URL
+
   const [token, setToken] = useState("");
 
   const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={() => {
-      console.log("token: ", token)
+
       return (
-      token
-        ? <Component token={token} />
-        : <Redirect to='/login' />
-    )}} />
+        token
+          ? <Component token={token} public_ip={public_ip} />
+          : <Redirect to='/login' />
+      )
+    }} />
   )
 
   return (
@@ -26,12 +29,12 @@ const App = () => {
       <Navbar props={{ token, setToken }} />
 
       <Switch>
-        
-        <Route  path="/login">
-          <LoginPage props={{ token, setToken }} />
+
+        <Route path="/login">
+          <LoginPage props={{ setToken, public_ip }} />
         </Route>
 
-        <PrivateRoute props={{ token }} component={Dashboard} />
+        <PrivateRoute path='/dashboard' props={{ token, public_ip }} component={Dashboard} />
         <>
           <NoMatch />
         </>

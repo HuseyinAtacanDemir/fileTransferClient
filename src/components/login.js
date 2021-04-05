@@ -12,7 +12,7 @@ const Login = ({ props }) => {
                 </div>
                 <div className="input">
                     <label htmlFor='password'>Password</label>
-                    <input className="text" type='password' name='password' onChange={(e) => setPassword(e.target.value)} />
+                    <input className="text" type='password' name='password' autoComplete='on' onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 <div className="input">
                     <input className="submit" type='submit' value='Login' />
